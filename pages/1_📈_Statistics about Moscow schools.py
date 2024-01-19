@@ -8,8 +8,9 @@ import plotly.express as px
 
 st.set_page_config(
     page_title="Statistics of Moscow schools",
-    page_icon="",
+    page_icon="📈",
 )
+st.sidebar.success("Выберете интересующий раздел")
 df = pd.read_csv('C:\\Users\\aleks\\EGE.csv')
 st.dataframe(df)
 pca = pd.read_csv('C:\\Users\\aleks\\Pca_ege.csv')
