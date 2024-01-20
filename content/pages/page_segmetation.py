@@ -12,7 +12,7 @@ import pygments.lexers.go as go_lexer  # Используйте другой п�
 
 
 st.set_page_config(
-    page_title="Segmentation of schools",
+    page_title="GoodSchool",
     page_icon="📊",
 )
 st.sidebar.success("Выберете интересующий раздел")
@@ -37,6 +37,10 @@ fig = px.scatter(
     color="cluster_label",
     category_orders={"Метка кластера": sorted_labels},
     color_discrete_sequence=px.colors.qualitative.Light24
+)
+fig.update_layout(
+    xaxis_title="Главная компонента №1",
+    yaxis_title="Главная компонента №2",
 )
 # Отобразите график в Streamlit
 st.plotly_chart(fig, use_container_width=True)
@@ -86,7 +90,8 @@ if on:
         title='Статистика по каждому кластеру',
         xaxis=dict(title='Метка кластера'),
         yaxis=dict(title='Среднее число людей сдавших ЕГЭ >= 220 баллов'),
-        showlegend=False
+        showlegend=False,
+
     )
     st.plotly_chart(fig, use_container_width=True)
 
