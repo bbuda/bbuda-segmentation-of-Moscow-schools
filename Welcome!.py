@@ -1,6 +1,6 @@
 import streamlit as st
 st.set_page_config(
-    page_title="Welcome",
+    page_title="GoodSchool",
     page_icon="👋",
 )
 st.title('Добро пожаловать на GoodSchool. Подобрать подходящую школу в Москве теперь проще!')
