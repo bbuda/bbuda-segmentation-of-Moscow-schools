@@ -10,6 +10,7 @@ st.set_page_config(
     page_title="GoodSchool",
     page_icon="📈",
 )
+
 st.title('Статистика московских школ')
 st.sidebar.success("Выберете интересующий раздел")
 conn = st.connection('mysql', type='sql')
