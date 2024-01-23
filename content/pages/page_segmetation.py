@@ -21,11 +21,11 @@ conn = st.connection('mysql', type='sql')
 st.title('Кластеризация школ Москвы')
 agree = st.checkbox('Вывести данные для кластеризации')
 if agree:
-     st.dataframe(pd.read_csv('C:\\Users\\aleks\\cl_df.csv'))
+    cl_df = conn.query('SELECT * FROM data_segmetation')
+    st.dataframe(cl_df)
 df = conn.query('SELECT * from moscow_schools;', ttl=600)
 
-pca = pd.read_csv('C:\\Users\\aleks\\Pca_ege.csv')
-
+pca = conn.query('SELECT * FROM pca_ege')
 pca['cluster_label'] = pca['cluster_label'].astype(str)
 sorted_labels = sorted(pca['cluster_label'].unique(), key=lambda x: int(x))
 st.header('Визуализация DBSCAN с использованием понижения размерности')
@@ -44,15 +44,14 @@ fig.update_layout(
 )
 # Отобразите график в Streamlit
 st.plotly_chart(fig, use_container_width=True)
-data = pd.read_csv('C:\\Users\\aleks\\EGE.csv')
-data['cluster_label'] = pca['cluster_label']
+df['cluster_label'] = pca['cluster_label']
 on = st.toggle('Статистика по кластерам')
 if on:
     st.subheader('Всего 18 кластеров, 56 в среднем школ в одном кластере')
     a = []
     r = 0
     for i in range(-1, len(np.unique(pca['cluster_label']))-1):
-        cluster_data = data[data['cluster_label'] == str(i)]
+        cluster_data = df[df['cluster_label'] == str(i)]
         mean_220 = cluster_data['students_220_and_above'].mean()
         mean_160 = cluster_data['students_above_160'].mean()
         dlina = len(cluster_data)
@@ -95,7 +94,7 @@ if on:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-cluster_labels = data['cluster_label'].unique()
+cluster_labels = df['cluster_label'].unique()
 
 
 sample_size = st.slider('Размер выборки', 1, 100, 10)
@@ -104,7 +103,7 @@ sample_size = st.slider('Размер выборки', 1, 100, 10)
 selected_cluster = st.selectbox('Выберите кластер', cluster_labels)
 
 
-sample = data[data['cluster_label'] == selected_cluster].sample(n=sample_size)
+sample = df[df['cluster_label'] == selected_cluster].sample(n=sample_size)
 
 
 st.dataframe(sample)
