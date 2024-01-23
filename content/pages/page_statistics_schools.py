@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import altair as alt
 import plotly.express as px
-import sqlalchemy
+
 st.set_page_config(
     page_title="GoodSchool",
     page_icon="📈",
