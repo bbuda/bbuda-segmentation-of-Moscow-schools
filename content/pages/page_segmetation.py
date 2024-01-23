@@ -8,7 +8,7 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 from pygments.lexers import go
 import plotly.graph_objs as go
-import pygments.lexers.go as go_lexer  # Используйте другой псевдоним
+import sqlalchemy
 
 
 st.set_page_config(
