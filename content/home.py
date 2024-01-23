@@ -25,20 +25,3 @@ st.markdown(
 
 
 
-def render_svg(svg):
-    """Renders the given svg string."""
-    b64 = base64.b64encode(svg.encode('utf-8')).decode("utf-8")
-    # Используйте стили CSS для уменьшения и позиционирования изображения
-    html = r'''
-    <div style="position: fixed; right: 90px; top: 550px; transform: scale(2.1);">
-        <img src="data:image/svg+xml;base64,%s" style="max-width: 100px; max-height: 100px;"/>
-    </div>
-    ''' % b64
-    c = st.container()
-    c.write(html, unsafe_allow_html=True)
-
-# Чтение содержимого SVG файла
-with open("D:\\book-education-food-svgrepo-com.svg", "r") as file:
-    svg = file.read()
-    render_svg(svg)
-st.caption("Основано на [открытых данных:](https://data.mos.ru/opendata/2072)")
